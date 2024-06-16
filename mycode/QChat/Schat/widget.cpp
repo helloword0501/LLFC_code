@@ -16,11 +16,21 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     this->setMaximumSize(500,700);
     this->setMinimumSize(500,700);
+    _logInWidget =new LogInWidget();
+
     InitUi();
 }
 
+void Widget::openLogInWidget()
+{
+    _logInWidget->show();
+    _logInWidget->resize(500,700);
+}
+
+
 Widget::~Widget()
 {
+    delete _logInWidget;
     delete ui;
 }
 
@@ -67,10 +77,5 @@ void Widget::InitUi()
     vLayout->addLayout(Hlayout4);
 }
 
-void Widget::openLogInWidget()
-{
-    qDebug() <<"123";
-    LogInWidget *logInWidget1 = new LogInWidget(this);
-    logInWidget1->show();
-}
+
 

@@ -9,10 +9,11 @@ class LogInWidget : public QWidget
     Q_OBJECT
 public:
     explicit LogInWidget(QWidget *parent = nullptr);
-
+    ~LogInWidget();
 signals:
 private:
     void InitUi();
+
 };
 
 #endif // LOGINWIDGET_H
