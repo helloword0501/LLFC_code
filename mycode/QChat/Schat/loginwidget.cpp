@@ -7,6 +7,7 @@
 #include <QSizePolicy>
 #include<QDebug>
 #include <QShowEvent>
+#include"Global.h"
 
 LogInWidget::LogInWidget(QWidget *parent) : QWidget(parent)
 {
@@ -24,12 +25,16 @@ LogInWidget::~LogInWidget()
 
 void LogInWidget::InitUi()
 {
+
+    QWidget *topWidget = new QWidget();
+    _TopWidgetLabel = new QLabel("测试",topWidget);
     QVBoxLayout *MianLayout = new QVBoxLayout(this);
     QHBoxLayout *Hlayout1 = new QHBoxLayout();
     QHBoxLayout *Hlayout2 = new QHBoxLayout();
     QHBoxLayout *Hlayout3 = new QHBoxLayout();
     QHBoxLayout *Hlayout4 = new QHBoxLayout();
     QHBoxLayout *Hlayout5 = new QHBoxLayout();
+    QHBoxLayout *Hlayout6 = new QHBoxLayout();
 
     QLabel *uerLbael = new QLabel("用户");
     QLabel *mailboxLbael= new QLabel("邮箱");
@@ -37,11 +42,27 @@ void LogInWidget::InitUi()
     QLabel *verifyLbael= new QLabel("确认");
     QLabel *VcodeuerLbael= new QLabel("验证码");
 
-    QLineEdit *uerLLine = new QLineEdit("用户");
-    QLineEdit *mailboxLine= new QLineEdit("邮箱");
-    QLineEdit *passWorLine= new QLineEdit("密码");
-    QLineEdit *verifyLine= new QLineEdit("确认");
-    QLineEdit *VcodeuerLine= new QLineEdit("验证码");
+    QLineEdit *uerLLine = new QLineEdit();
+    QLineEdit *mailboxLine= new QLineEdit();
+    QLineEdit *passWorLine= new QLineEdit();
+    QLineEdit *verifyLine= new QLineEdit();
+    QLineEdit *VcodeuerLine= new QLineEdit();
+    //模式为密码模式
+    passWorLine->setEchoMode(QLineEdit::Password);
+    verifyLine->setEchoMode(QLineEdit::Password);
+
+    QPushButton *getButton = new QPushButton("获取");
+    QPushButton *verifyButton = new QPushButton("确认");
+    QPushButton *canceButton = new QPushButton("取消");
+
+    connect(verifyButton ,&QPushButton::clicked ,this ,&LogInWidget::codeButtonClick);
+    //
+    _TopWidgetLabel->setProperty("state","normal");
+    repolish(_TopWidgetLabel);
+
+    _TopWidgetLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    _TopWidgetLabel->setStyleSheet("background-color:rgb(191,191,191);border-radius:5px;");
+    MianLayout->addWidget(topWidget);
     // 添加顶部弹簧
     QSpacerItem* topSpacer = new QSpacerItem(100, 100, QSizePolicy::Minimum, QSizePolicy::Fixed);
     MianLayout->addSpacerItem(topSpacer);
@@ -63,11 +84,27 @@ void LogInWidget::InitUi()
 
     Hlayout5->addWidget(VcodeuerLbael);
     Hlayout5->addWidget(VcodeuerLine);
+    Hlayout5->addWidget(getButton);
     MianLayout->addLayout(Hlayout5);
     // 添加底部弹簧
     QSpacerItem* bottomSpacer = new QSpacerItem(100, 100, QSizePolicy::Minimum, QSizePolicy::Fixed);
     MianLayout->addSpacerItem(bottomSpacer);
 
+    Hlayout6->addWidget(verifyButton);
+    Hlayout6->addWidget(canceButton);
+    MianLayout->addLayout(Hlayout6);
+}
 
+void LogInWidget::ShowTips(QString tips)
+{
+    _TopWidgetLabel->setProperty("state","err");
+    _TopWidgetLabel->setText(tips);
+    repolish(_TopWidgetLabel);
+}
+
+void LogInWidget::codeButtonClick()
+{
+    qDebug()<<"this";
+    ShowTips("错误");
 }
 

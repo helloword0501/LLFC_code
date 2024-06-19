@@ -1,0 +1,13 @@
+QWidget#LogInWidget{
+background-color:rgb(255,255,255)
+}
+QWidget#Widget{
+background-color:rgb(255,255,255)
+}
+#_TopWidgetLabel[state='normal']{
+   color: green;
+}
+
+#_TopWidgetLabel[state='err']{
+   color: red;
+}

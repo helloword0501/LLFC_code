@@ -17,6 +17,7 @@ Widget::Widget(QWidget *parent)
     this->setMaximumSize(500,700);
     this->setMinimumSize(500,700);
     _logInWidget =new LogInWidget();
+   // _logInWidget->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
 
     InitUi();
 }

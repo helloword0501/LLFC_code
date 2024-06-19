@@ -13,6 +13,11 @@ public:
 signals:
 private:
     void InitUi();
+    void ShowTips(QString tips);
+public slots:
+    void codeButtonClick();
+private:
+    QLabel *_TopWidgetLabel;
 
 };
 
